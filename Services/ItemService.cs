@@ -16,5 +16,10 @@ namespace ServicoItem.Services
             
             _itemRepository.Inserir(item);
         }
+        public Item FindById(int id) { 
+            return _itemRepository.FindById(id);
+
+        }
+
     }
 }

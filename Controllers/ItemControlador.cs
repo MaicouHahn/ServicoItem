@@ -45,5 +45,20 @@ namespace ServicoItem.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
         }
+
+        [HttpGet("{id:int}")]
+        public IActionResult BuscarPorId([FromRoute]int id) {
+            try
+            {
+                var item = _itemService.FindById(id);
+                if (item == null) { 
+                    return NotFound(new { Message = $"Item com ID {id} não encontrado." });
+                }
+                return Ok(item);
+            }
+            catch (Exception e) {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
     }
 }

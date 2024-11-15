@@ -14,5 +14,13 @@ namespace ServicoItem.Repositorio
             _dataContext.Add(item);
             _dataContext.SaveChanges();
         }
+
+        public Item FindById(int id) {
+            return _dataContext.Find<Item>(id);
+        }
+
+        public List<Item> FindAll() { 
+            return _dataContext.Set<Item>().ToList();
+        }
     }
 }
