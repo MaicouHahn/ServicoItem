@@ -60,5 +60,43 @@ namespace ServicoItem.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
         }
+
+        [HttpGet]
+        public IActionResult BuscarTodos() {
+            try
+            {
+                var item = _itemService.FindAll();
+
+                if (item == null)
+                {
+                    return NotFound(new { Message = $"Nehum Item cadastrado ainda" });
+                }
+
+                return Ok(item);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult DeletarPorId([FromRoute] int id)
+        {
+            try
+            {
+                var check = _itemService.DeleteById(id);
+                if (check == false)
+                {
+                    return NotFound(new { Message = $"Houve problema ao deletar o item" });
+                }
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
     }
 }

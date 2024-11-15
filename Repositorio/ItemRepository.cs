@@ -22,5 +22,10 @@ namespace ServicoItem.Repositorio
         public List<Item> FindAll() { 
             return _dataContext.Set<Item>().ToList();
         }
+
+        public void DeleteById(Item item) { 
+             _dataContext.Remove(item);
+             _dataContext.SaveChanges();
+        }
     }
 }
