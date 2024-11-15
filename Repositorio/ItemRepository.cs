@@ -27,5 +27,10 @@ namespace ServicoItem.Repositorio
              _dataContext.Remove(item);
              _dataContext.SaveChanges();
         }
+
+        public void UpdateById(Item item) { 
+            _dataContext.Update(item);
+            _dataContext.SaveChanges(); 
+        }
     }
 }

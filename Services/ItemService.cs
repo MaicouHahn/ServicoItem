@@ -32,5 +32,22 @@ namespace ServicoItem.Services
             _itemRepository.DeleteById(item);
             return true;
         }
+
+        public bool UpdateById(int id,Item item) {
+
+            var itemDTO = _itemRepository.FindById(id);
+            if (itemDTO == null) {
+                return false;
+            }
+
+            itemDTO.IdItem = id;
+            itemDTO.NomeItem = item.NomeItem;
+            itemDTO.CodItem = item.CodItem;
+            itemDTO.DescricaoItem = item.DescricaoItem;
+            itemDTO.PrecoItem = item.PrecoItem;
+
+            _itemRepository.UpdateById(itemDTO);
+            return true;
+        }
     }
 }

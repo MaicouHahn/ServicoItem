@@ -98,5 +98,24 @@ namespace ServicoItem.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
+
+        [HttpPut("{id:int}")]
+        public IActionResult AtualizarItem([FromRoute]int id, [FromBody] Item item) {
+            try
+            {
+                var check = _itemService.UpdateById(id,item);
+                if (check == false)
+                {
+                    return NotFound(new { Message = $"Houve problema ao Editar o item" });
+                }
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+
     }
 }
